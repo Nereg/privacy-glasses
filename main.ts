@@ -297,7 +297,9 @@ export default class PrivacyGlassesPlugin extends Plugin {
         tags.push(...this.app.metadataCache.getFileCache(view.file).tags.filter(x => !!x.tag).map(x => x.tag));
       }
       // Get tags in properties, if any
-      if ('tags' in this.app.metadataCache.getFileCache(view.file)?.frontmatter) {
+      let frontmatter = this.app.metadataCache.getFileCache(view.file)?.frontmatter
+      // console.log(frontmatter)
+      if (frontmatter && 'tags' in frontmatter) { // here
         tags.push(...this.app.metadataCache.getFileCache(view.file).frontmatter.tags.filter((x: string) => !!x));
       }
       if (tags && tags.length > 0) {
